@@ -1,6 +1,7 @@
 package com.knobtviker.android.things.contrib.driver.tsl2561;
 
 import android.hardware.Sensor;
+import android.hardware.SensorManager;
 
 import com.google.android.things.userdriver.UserDriverManager;
 import com.google.android.things.userdriver.UserSensor;
@@ -135,7 +136,7 @@ public class TSL2561SensorDriver implements AutoCloseable {
         @Override
         public UserSensorReading read() throws IOException {
             final float luminosity = mDevice.readLuminosity();
-            return new UserSensorReading(new float[]{luminosity, (luminosity * 3.0f)});
+            return new UserSensorReading(new float[]{luminosity, (luminosity * (SensorManager.LIGHT_SUNLIGHT_MAX/DRIVER_MAX_RANGE))});
         }
 
         @Override
