@@ -18,10 +18,6 @@ import java.util.UUID;
 public class TSL2561SensorDriver implements AutoCloseable {
     private static final String TAG = TSL2561SensorDriver.class.getSimpleName();
 
-    public static final int LUMINANCE = 0;
-    public static final int LUMINANCE_FITTED = 1;
-    public static final int SCREEN_BRIGHTNESS = 2;
-
     private TSL2561 mDevice;
 
     // DRIVER parameters
@@ -137,7 +133,7 @@ public class TSL2561SensorDriver implements AutoCloseable {
         @Override
         public UserSensorReading read() throws IOException {
             final float luminosity = mDevice.readLuminosity();
-            return new UserSensorReading(new float[]{luminosity, (luminosity * (SensorManager.LIGHT_SUNLIGHT_MAX/DRIVER_MAX_RANGE)), Math.round(luminosity * (255.0f / DRIVER_MAX_RANGE))});
+            return new UserSensorReading(new float[]{luminosity});
         }
 
         @Override
@@ -151,5 +147,13 @@ public class TSL2561SensorDriver implements AutoCloseable {
         private boolean isEnabled() {
             return mEnabled;
         }
+    }
+
+    public static float getFittedLuminosity(final float luminosity) {
+        return luminosity * (SensorManager.LIGHT_SUNLIGHT_MAX / TSL2561.MAX_LUMINOSITY_LUX);
+    }
+
+    public static int getScreenBrightness(final float luminosity) {
+        return Math.round(luminosity * (255.0f / TSL2561.MAX_LUMINOSITY_LUX));
     }
 }
