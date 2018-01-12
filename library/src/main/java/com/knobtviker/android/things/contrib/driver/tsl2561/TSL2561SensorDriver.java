@@ -17,6 +17,9 @@ import java.util.UUID;
 public class TSL2561SensorDriver implements AutoCloseable {
     private static final String TAG = TSL2561SensorDriver.class.getSimpleName();
 
+    public static final int LUMINANCE = 0;
+    public static final int LUMINANCE_FITTED = 1;
+
     private TSL2561 mDevice;
 
     // DRIVER parameters
@@ -32,6 +35,7 @@ public class TSL2561SensorDriver implements AutoCloseable {
      * Create a new framework sensor driver connected on the given bus.
      * The driver emits {@link Sensor} with luminosity data when
      * registered.
+     *
      * @param bus I2C bus the sensor is connected to.
      * @throws IOException
      */
@@ -43,7 +47,8 @@ public class TSL2561SensorDriver implements AutoCloseable {
      * Create a new framework sensor driver connected on the given bus and address.
      * The driver emits {@link Sensor} with luminosity data when
      * registered.
-     * @param bus I2C bus the sensor is connected to.
+     *
+     * @param bus     I2C bus the sensor is connected to.
      * @param address I2C address of the sensor.
      * @throws IOException
      */
@@ -53,6 +58,7 @@ public class TSL2561SensorDriver implements AutoCloseable {
 
     /**
      * Close the driver and the underlying device.
+     *
      * @throws IOException
      */
     @Override
@@ -70,6 +76,7 @@ public class TSL2561SensorDriver implements AutoCloseable {
 
     /**
      * Register a {@link UserSensor} that pipes luminosity readings into the Android SensorManager.
+     *
      * @see #unregisterLuminositySensor()
      */
     public void registerLuminositySensor() {
@@ -127,7 +134,8 @@ public class TSL2561SensorDriver implements AutoCloseable {
 
         @Override
         public UserSensorReading read() throws IOException {
-            return new UserSensorReading(new float[]{mDevice.readLuminosity()});
+            final float luminosity = mDevice.readLuminosity();
+            return new UserSensorReading(new float[]{luminosity, (luminosity * 3.0f)});
         }
 
         @Override

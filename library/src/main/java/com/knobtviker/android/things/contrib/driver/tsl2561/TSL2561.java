@@ -4,6 +4,7 @@ package com.knobtviker.android.things.contrib.driver.tsl2561;
  * Created by bojan on 01/08/2017.
  */
 
+import android.os.SystemClock;
 import android.support.annotation.IntDef;
 
 import com.google.android.things.pio.I2cDevice;
@@ -302,7 +303,7 @@ public class TSL2561 implements AutoCloseable {
      *
      * @throws IOException
      */
-    public void setGain(int gain) throws IOException {
+    public void setGain(@Gain final int gain) throws IOException {
         setGainAndIntegration(gain, integration);
     }
 
@@ -320,7 +321,7 @@ public class TSL2561 implements AutoCloseable {
      *
      * @throws IOException
      */
-    public void setIntegration(int integration) throws IOException {
+    public void setIntegration(@IntegrationTime final int integration) throws IOException {
         setGainAndIntegration(gain, integration);
     }
 
@@ -329,7 +330,7 @@ public class TSL2561 implements AutoCloseable {
      *
      * @throws IOException
      */
-    public void setGainAndIntegration(int gain, int integration) throws IOException {
+    public void setGainAndIntegration(@Gain final int gain, @IntegrationTime final int integration) throws IOException {
         if (gain != TSL2561_GAIN_1X && gain != TSL2561_GAIN_16X) {
             throw new IllegalArgumentException("Bad gain value [" + gain + "]");
         }
@@ -645,10 +646,6 @@ public class TSL2561 implements AutoCloseable {
      * Pause for integration time
      */
     private void waitFor(final long howMuch) {
-        try {
-            Thread.sleep(howMuch);
-        } catch (InterruptedException ie) {
-            ie.printStackTrace();
-        }
+        SystemClock.sleep(howMuch);
     }
 }
