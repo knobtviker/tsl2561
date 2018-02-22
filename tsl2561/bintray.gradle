@@ -40,7 +40,7 @@ bintray {
 
     pkg {
         repo = 'maven'
-        name = 'bme280'
+        name = 'tsl2561'
         desc = 'Android Things TAOS TSL2561 driver'
         websiteUrl = 'https://github.com/knobtviker/tsl2561'
         issueTrackerUrl = 'https://github.com/knobtviker/tsl2561/issues'
