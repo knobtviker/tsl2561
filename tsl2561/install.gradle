@@ -1,0 +1,39 @@
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.knobtviker.android.things.contrib.community.driver'
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                groupId 'com.knobtviker.android.things.contrib.community.driver'
+                artifactId 'tsl2561'
+
+                name 'tsl2561'
+                description 'Android Things TAOS TSL2561 driver'
+                url 'https://github.com/knobtviker/tsl2561'
+
+                licenses {
+                    license {
+                        name 'MIT'
+                        url 'https://github.com/knobtviker/tsl2561/blob/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'knobtviker'
+                        name 'Bojan Komljenović'
+                        email 'knobtviker@gmail.com'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/knobtviker/tsl2561.git'
+                    developerConnection 'https://github.com/knobtviker/tsl2561.git'
+                    url 'https://github.com/knobtviker/tsl2561'
+
+                }
+            }
+        }
+    }
+}
