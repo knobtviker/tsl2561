@@ -4,9 +4,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 
 import com.google.android.things.userdriver.UserDriverManager;
-import com.google.android.things.userdriver.UserSensor;
-import com.google.android.things.userdriver.UserSensorDriver;
-import com.google.android.things.userdriver.UserSensorReading;
+import com.google.android.things.userdriver.sensor.UserSensor;
+import com.google.android.things.userdriver.sensor.UserSensorDriver;
+import com.google.android.things.userdriver.sensor.UserSensorReading;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -84,7 +84,7 @@ public class TSL2561SensorDriver implements AutoCloseable {
 
         if (mLuminosityUserDriver == null) {
             mLuminosityUserDriver = new LuminosityUserDriver();
-            UserDriverManager.getManager().registerSensor(mLuminosityUserDriver.getUserSensor());
+            UserDriverManager.getInstance().registerSensor(mLuminosityUserDriver.getUserSensor());
         }
     }
 
@@ -93,12 +93,12 @@ public class TSL2561SensorDriver implements AutoCloseable {
      */
     public void unregisterLuminositySensor() {
         if (mLuminosityUserDriver != null) {
-            UserDriverManager.getManager().unregisterSensor(mLuminosityUserDriver.getUserSensor());
+            UserDriverManager.getInstance().unregisterSensor(mLuminosityUserDriver.getUserSensor());
             mLuminosityUserDriver = null;
         }
     }
 
-    private class LuminosityUserDriver extends UserSensorDriver {
+    private class LuminosityUserDriver implements UserSensorDriver {
         // DRIVER parameters
         // documented at https://source.android.com/devices/sensors/hal-interface.html#sensor_t
         private static final float DRIVER_MAX_RANGE = TSL2561.MAX_LUMINOSITY_LUX;

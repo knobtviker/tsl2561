@@ -8,7 +8,7 @@ import android.os.SystemClock;
 import android.support.annotation.IntDef;
 
 import com.google.android.things.pio.I2cDevice;
-import com.google.android.things.pio.PeripheralManagerService;
+import com.google.android.things.pio.PeripheralManager;
 
 import java.io.IOException;
 import java.lang.annotation.Retention;
@@ -233,8 +233,8 @@ public class TSL2561 implements AutoCloseable {
     }
 
     public TSL2561(String bus, int address, int sensorPackage) throws IOException {
-        final PeripheralManagerService pioService = new PeripheralManagerService();
-        final I2cDevice device = pioService.openI2cDevice(bus, address);
+        final PeripheralManager peripheralManager = PeripheralManager.getInstance();
+        final I2cDevice device = peripheralManager.openI2cDevice(bus, address);
 
         this.sensorPackage = sensorPackage;
 
