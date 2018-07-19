@@ -1,0 +1,16 @@
+{
+    "title": "TSL2561",
+    "category": "luminosity sensor",
+    "published-maven": {
+        "maven-url": "https://jitpack.io",
+        "groupid": "com.github.knobtviker",
+        "artifactid": "tsl2561"
+    },
+    "compatible-with": [
+        {
+            "title": "TSL2561 Breakout",
+            "url": "https://www.adafruit.com/product/439",
+            "photo": "https://cdn-shop.adafruit.com/970x728/439-00.jpg"
+        }
+    ]
+}
