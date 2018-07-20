@@ -1,0 +1,16 @@
+{
+    "title": "TSL2561",
+    "category": "ambient light sensor",
+    "published-maven": {
+        "maven-url": "https://dl.bintray.com/knobtviker/maven",
+        "groupid": "com.knobtviker.android.things.contrib.community.driver",
+        "artifactid": "tsl2561"
+    },
+    "compatible-with": [
+        {
+            "title": "Adafruit TSL2561 Digital Luminosity/Lux/Light Sensor Breakout",
+            "url": "https://www.adafruit.com/product/439",
+            "photo": "https://cdn-shop.adafruit.com/1200x900/439-00.jpg"
+        }
+    ]
+}
